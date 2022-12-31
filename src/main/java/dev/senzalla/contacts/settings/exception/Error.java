@@ -1,17 +1,17 @@
-package dev.senzalla.contacts.model.error.module;
+package dev.senzalla.contacts.settings.exception;
 
 import lombok.Getter;
 
 @Getter
-public class ErrorDto {
+public class Error {
     private final String error;
     private String property;
 
-    public ErrorDto(String error) {
+    public Error(String error) {
         this.error = error;
     }
 
-    public ErrorDto(String error, String property) {
+    public Error(String error, String property) {
         this.error = error;
         this.property = property;
     }
