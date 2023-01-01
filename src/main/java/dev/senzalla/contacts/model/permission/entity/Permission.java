@@ -1,4 +1,4 @@
-package dev.senzalla.contacts.model.permission;
+package dev.senzalla.contacts.model.permission.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

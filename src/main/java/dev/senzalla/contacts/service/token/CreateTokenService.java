@@ -1,6 +1,6 @@
 package dev.senzalla.contacts.service.token;
 
-import dev.senzalla.contacts.model.user.User;
+import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.service.user.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

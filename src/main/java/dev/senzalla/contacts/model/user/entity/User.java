@@ -1,6 +1,6 @@
-package dev.senzalla.contacts.model.user;
+package dev.senzalla.contacts.model.user.entity;
 
-import dev.senzalla.contacts.model.permission.Permission;
+import dev.senzalla.contacts.model.permission.entity.Permission;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -29,14 +29,9 @@ public class User implements UserDetails {
     @Column(name = "mailUser", nullable = false)
     private String mailUser;
 
-    @Basic
-    @Column(name = "passwordUser", nullable = false, length = 255)
+    @NotBlank
+    @Column(name = "passwordUser", nullable = false)
     private String passwordUser;
-
-    @Basic
-    @Enumerated(EnumType.STRING)
-    @Column(name = "loginOrigin", nullable = false, length = 255)
-    private ELoginOrigin loginOrigin;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_permission",
