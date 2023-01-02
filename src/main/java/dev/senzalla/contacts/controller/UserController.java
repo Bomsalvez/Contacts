@@ -45,5 +45,11 @@ public class UserController {
     ) {
         return ResponseEntity.ok().body(userService.findListUser(pageable, nameUser, mailUser));
     }
+
+    @PutMapping("/{pkUser}")
+    public ResponseEntity<UserCreated> editUser(@PathVariable Long pkUser, @RequestBody @Valid UserDto userDto, @RequestHeader("Authorization") String token) {
+        UserCreated userCreated = userService.editUser(pkUser, userDto, token);
+        return ResponseEntity.ok().body(userCreated);
+    }
 }
 

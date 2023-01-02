@@ -35,4 +35,8 @@ public class UserService {
     public Page<UserSummarize> findListUser(Pageable pageable, String nameUser, String mailUser) {
         return searchUserService.findListUser(pageable, nameUser, mailUser);
     }
+
+    public UserCreated editUser(Long pkUser, UserDto userDto, String token) {
+        return createUserService.editUser(pkUser, userDto, token);
+    }
 }

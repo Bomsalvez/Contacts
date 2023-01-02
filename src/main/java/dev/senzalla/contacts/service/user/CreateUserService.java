@@ -7,6 +7,7 @@ import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserDto;
 import dev.senzalla.contacts.repository.UserRepository;
 import dev.senzalla.contacts.service.permission.PermissionService;
+import dev.senzalla.contacts.service.token.SearchTokenService;
 import dev.senzalla.contacts.settings.exception.DuplicateException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ class CreateUserService {
     private final PermissionService permissionService;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final SearchTokenService searchTokenService;
 
     public UserCreated createUser(UserDto userDto) {
         try {
@@ -30,7 +32,7 @@ class CreateUserService {
             definePermissions(user);
             encodePassword(user);
             user = userRepository.save(user);
-            return UserMapper.toUserDto(user);
+            return UserMapper.toUserCreated(user);
         } catch (DataIntegrityViolationException ex) {
             throw new DuplicateException(Objects.requireNonNull(ex.getRootCause()).getMessage());
         }
@@ -44,5 +46,18 @@ class CreateUserService {
     private void definePermissions(User user) {
         Set<Permission> permissions = Set.of(permissionService.findPermission());
         user.setPermissions(permissions);
+    }
+
+    public UserCreated editUser(Long pkUser, UserDto userDto, String token) {
+        try {
+            searchTokenService.checkUserAuthorization(pkUser, token);
+            User user = UserMapper.toUser(userDto);
+            encodePassword(user);
+            user.setPkUser(pkUser);
+            user = userRepository.save(user);
+            return UserMapper.toUserCreated(user);
+        } catch (DataIntegrityViolationException ex) {
+            throw new DuplicateException(Objects.requireNonNull(ex.getRootCause()).getMessage());
+        }
     }
 }

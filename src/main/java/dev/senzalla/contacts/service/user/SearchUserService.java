@@ -19,7 +19,7 @@ public class SearchUserService {
 
     public UserCreated findUserCreated(Long pkUser) {
         User user = findUser(pkUser);
-        return UserMapper.toUserDto(user);
+        return UserMapper.toUserCreated(user);
     }
 
     public User findUser(Long pkUser) {

@@ -20,7 +20,7 @@ public class UserMapper {
         return mapper.map(userDto, User.class);
     }
 
-    public static UserCreated toUserDto(User user) {
+    public static UserCreated toUserCreated(User user) {
         return mapper.map(user, UserCreated.class);
     }
 

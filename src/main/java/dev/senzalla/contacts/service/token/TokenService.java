@@ -15,7 +15,7 @@ public class TokenService {
         return createTokenService.createToken(authenticationToken);
     }
 
-    public boolean chackValidToken(String token) {
+    public boolean checkValidToken(String token) {
         return searchTokenService.checkValidToken(token);
     }
 

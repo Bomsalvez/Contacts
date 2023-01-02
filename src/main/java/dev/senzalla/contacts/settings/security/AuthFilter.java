@@ -23,7 +23,7 @@ public class AuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = getToken(request);
-        boolean isValidToken = tokenService.chackValidToken(token);
+        boolean isValidToken = tokenService.checkValidToken(token);
         if (isValidToken) {
             authUser(token);
         }
