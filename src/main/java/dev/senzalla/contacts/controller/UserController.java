@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +39,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Page<UserSummarize>> findListUser(
-            Pageable pageable,
+            @SortDefault(sort = "nameUser", direction = Sort.Direction.ASC) Pageable pageable,
             @RequestParam(value = "nameUser", required = false) String nameUser,
             @RequestParam(value = "mailUser", required = false) String mailUser
     ) {

@@ -20,24 +20,8 @@ public class ResourceExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public Error exceptionHandler(NotFoundException exception) {
-        String message = messageSource.getMessage(exception.getMessage(), null, LocaleContextHolder.getLocale());
-        return new Error(message);
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<Error> exceptionHandler(MethodArgumentNotValidException exception) {
-        List<Error> errors = new ArrayList<>();
-        List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
-
-        fieldErrors.forEach(fieldError -> {
-            String message = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-            Error error = new Error(message, fieldError.getField());
-
-            errors.add(error);
-        });
-        return errors;
+    public Error handle(NotFoundException ex) {
+        return new Error(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -46,7 +30,7 @@ public class ResourceExceptionHandler {
         return new Error(ex.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(FailureAuthenticationException.class)
     public Error handle(FailureAuthenticationException ex) {
         return new Error(ex.getMessage());
@@ -62,5 +46,20 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(EmailException.class)
     public Error handle(EmailException ex) {
         return new Error(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public List<Error> exceptionHandler(MethodArgumentNotValidException exception) {
+        List<Error> errors = new ArrayList<>();
+        List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
+
+        fieldErrors.forEach(fieldError -> {
+            String message = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
+            Error error = new Error(message, fieldError.getField());
+
+            errors.add(error);
+        });
+        return errors;
     }
 }
