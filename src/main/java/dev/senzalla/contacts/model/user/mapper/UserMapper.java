@@ -3,6 +3,7 @@ package dev.senzalla.contacts.model.user.mapper;
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserDto;
+import dev.senzalla.contacts.model.user.module.UserSummarize;
 import org.modelmapper.ModelMapper;
 
 public class UserMapper {
@@ -21,5 +22,9 @@ public class UserMapper {
 
     public static UserCreated toUserDto(User user) {
         return mapper.map(user, UserCreated.class);
+    }
+
+    public static UserSummarize toUserSummarize(User user) {
+        return mapper.map(user, UserSummarize.class);
     }
 }

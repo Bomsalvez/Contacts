@@ -3,10 +3,13 @@ package dev.senzalla.contacts.service.user;
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.model.user.mapper.UserMapper;
 import dev.senzalla.contacts.model.user.module.UserCreated;
+import dev.senzalla.contacts.model.user.module.UserSummarize;
 import dev.senzalla.contacts.repository.UserRepository;
 import dev.senzalla.contacts.settings.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,4 +30,8 @@ public class SearchUserService {
         return userRepository.findUserByMailUser(mail).orElseThrow(() -> new NotFoundException("User Not Found"));
     }
 
+    public Page<UserSummarize> findListUser(Pageable pageable, String nameUser, String mailUser) {
+        Page<User> users = userRepository.findByNameUserAndMailUser(pageable, nameUser, mailUser);
+        return users.map(UserMapper::toUserSummarize);
+    }
 }
