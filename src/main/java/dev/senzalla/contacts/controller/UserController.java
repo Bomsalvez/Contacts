@@ -50,8 +50,9 @@ public class UserController {
     }
 
     @PutMapping(urlSuffix)
-    public ResponseEntity<UserCreated> editUser(@PathVariable Long pkUser, @RequestBody @Valid UserDto userDto, @RequestHeader("Authorization") String token) {
-        UserCreated userCreated = userService.editUser(pkUser, userDto, token);
+    @PreAuthorize("#pkUser == authentication.principal.pkUser")
+    public ResponseEntity<UserCreated> editUser(@PathVariable Long pkUser, @RequestBody @Valid UserDto userDto) {
+        UserCreated userCreated = userService.editUser(pkUser, userDto);
         return ResponseEntity.ok().body(userCreated);
     }
 
@@ -59,6 +60,13 @@ public class UserController {
     @PatchMapping(urlSuffix)
     public ResponseEntity<UserCreated> promotionUser(@PathVariable Long pkUser, @RequestBody PermissionPromotion permissionPromotion) {
         return ResponseEntity.ok().body(userService.promotionUser(pkUser, permissionPromotion));
+    }
+
+    @DeleteMapping(urlSuffix)
+    @PreAuthorize("hasAuthority('ADMIN') or #pkUser == authentication.principal.pkUser")
+    public ResponseEntity<?> deleteUser(@PathVariable Long pkUser) {
+        userService.deleteUser(pkUser);
+        return ResponseEntity.noContent().build();
     }
 }
 

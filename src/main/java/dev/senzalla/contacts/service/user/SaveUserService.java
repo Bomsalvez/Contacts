@@ -8,7 +8,6 @@ import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserDto;
 import dev.senzalla.contacts.repository.UserRepository;
 import dev.senzalla.contacts.service.permission.PermissionService;
-import dev.senzalla.contacts.service.token.SearchTokenService;
 import dev.senzalla.contacts.settings.exception.DuplicateException;
 import dev.senzalla.contacts.settings.exception.NotFoundException;
 import lombok.AllArgsConstructor;
@@ -22,11 +21,10 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-class CreateUserService {
+class SaveUserService {
     private final PermissionService permissionService;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final SearchTokenService searchTokenService;
 
     public UserCreated createUser(UserDto userDto) {
         try {
@@ -40,10 +38,9 @@ class CreateUserService {
         }
     }
 
-    public UserCreated editUser(Long pkUser, UserDto userDto, String token) {
+    public UserCreated editUser(Long pkUser, UserDto userDto) {
         try {
-            searchTokenService.checkUserAuthorization(pkUser, token);
-            User user = userRepository.findById(pkUser).orElseThrow(() -> new NotFoundException("User Not Foud"));
+            User user = findUser(pkUser);
             encodePassword(user);
             user.setNameUser(userDto.getNameUser());
             user.setMailUser(userDto.getMailUser());
@@ -55,10 +52,16 @@ class CreateUserService {
     }
 
     public UserCreated promotionUser(Long pkUser, PermissionPromotion permissionPromotion) {
-        User user = userRepository.findById(pkUser).orElseThrow(() -> new NotFoundException("User Not Found"));
+        User user = findUser(pkUser);
         definePermissions(user, permissionPromotion);
         userRepository.save(user);
         return UserMapper.toUserCreated(user);
+    }
+
+
+    public void deleteUser(Long pkUser) {
+        User user = findUser(pkUser);
+        userRepository.delete(user);
     }
 
     private void encodePassword(User user) {
@@ -76,5 +79,9 @@ class CreateUserService {
         Permission permission = permissionService.findPermission(permissionPromotion);
         permissions.add(permission);
         user.setPermissions(permissions);
+    }
+
+    private User findUser(Long pkUser) {
+        return userRepository.findById(pkUser).orElseThrow(() -> new NotFoundException("User Not Found"));
     }
 }

@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
     private final SearchUserService searchUserService;
-    private final CreateUserService createUserService;
+    private final SaveUserService saveUserService;
 
     public UserCreated createUser(UserDto userDto) {
-        return createUserService.createUser(userDto);
+        return saveUserService.createUser(userDto);
     }
 
     public UserCreated findUserCreated(Long pkUser) {
@@ -37,11 +37,15 @@ public class UserService {
         return searchUserService.findListUser(pageable, nameUser, mailUser);
     }
 
-    public UserCreated editUser(Long pkUser, UserDto userDto, String token) {
-        return createUserService.editUser(pkUser, userDto, token);
+    public UserCreated editUser(Long pkUser, UserDto userDto) {
+        return saveUserService.editUser(pkUser, userDto);
     }
 
     public UserCreated promotionUser(Long pkUser, PermissionPromotion permissionPromotion) {
-        return createUserService.promotionUser(pkUser, permissionPromotion);
+        return saveUserService.promotionUser(pkUser, permissionPromotion);
+    }
+
+    public void deleteUser(Long pkUser) {
+        saveUserService.deleteUser(pkUser);
     }
 }
