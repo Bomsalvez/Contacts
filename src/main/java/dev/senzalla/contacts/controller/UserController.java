@@ -1,5 +1,6 @@
 package dev.senzalla.contacts.controller;
 
+import dev.senzalla.contacts.model.permission.module.PermissionPromotion;
 import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserDto;
 import dev.senzalla.contacts.model.user.module.UserSummarize;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,6 +25,7 @@ import java.net.URI;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
     private final UserService userService;
+    private final String urlSuffix = "/{pkUser}";
 
     @PostMapping
     @Transactional
@@ -32,7 +35,7 @@ public class UserController {
         return ResponseEntity.created(uri).body(newUser);
     }
 
-    @GetMapping("/{pkUser}")
+    @GetMapping(urlSuffix)
     public ResponseEntity<UserCreated> findUser(@PathVariable Long pkUser) {
         return ResponseEntity.ok().body(userService.findUserCreated(pkUser));
     }
@@ -46,10 +49,16 @@ public class UserController {
         return ResponseEntity.ok().body(userService.findListUser(pageable, nameUser, mailUser));
     }
 
-    @PutMapping("/{pkUser}")
+    @PutMapping(urlSuffix)
     public ResponseEntity<UserCreated> editUser(@PathVariable Long pkUser, @RequestBody @Valid UserDto userDto, @RequestHeader("Authorization") String token) {
         UserCreated userCreated = userService.editUser(pkUser, userDto, token);
         return ResponseEntity.ok().body(userCreated);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PatchMapping(urlSuffix)
+    public ResponseEntity<UserCreated> promotionUser(@PathVariable Long pkUser, @RequestBody PermissionPromotion permissionPromotion) {
+        return ResponseEntity.ok().body(userService.promotionUser(pkUser, permissionPromotion));
     }
 }
 

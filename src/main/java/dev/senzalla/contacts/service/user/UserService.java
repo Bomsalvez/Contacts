@@ -1,5 +1,6 @@
 package dev.senzalla.contacts.service.user;
 
+import dev.senzalla.contacts.model.permission.module.PermissionPromotion;
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserDto;
@@ -38,5 +39,9 @@ public class UserService {
 
     public UserCreated editUser(Long pkUser, UserDto userDto, String token) {
         return createUserService.editUser(pkUser, userDto, token);
+    }
+
+    public UserCreated promotionUser(Long pkUser, PermissionPromotion permissionPromotion) {
+        return createUserService.promotionUser(pkUser, permissionPromotion);
     }
 }
