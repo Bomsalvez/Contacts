@@ -1,9 +1,9 @@
 package dev.senzalla.contacts.controller;
 
-import dev.senzalla.contacts.model.permission.module.PermissionPromotion;
+import dev.senzalla.contacts.model.permission.module.PromotionAuthorityUser;
 import dev.senzalla.contacts.model.user.module.UserCreated;
-import dev.senzalla.contacts.model.user.module.UserDto;
 import dev.senzalla.contacts.model.user.module.UserSummarize;
+import dev.senzalla.contacts.model.user.module.UserToBeCreated;
 import dev.senzalla.contacts.service.user.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -29,8 +29,8 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<UserCreated> createUser(@RequestBody @Valid UserDto userDto, UriComponentsBuilder uriComponentsBuilder) {
-        UserCreated newUser = userService.createUser(userDto);
+    public ResponseEntity<UserCreated> createUser(@RequestBody @Valid UserToBeCreated userToBeCreated, UriComponentsBuilder uriComponentsBuilder) {
+        UserCreated newUser = userService.createUser(userToBeCreated);
         URI uri = uriComponentsBuilder.path("/user/{pkUser}").buildAndExpand(newUser.getPkUser()).toUri();
         return ResponseEntity.created(uri).body(newUser);
     }
@@ -51,15 +51,14 @@ public class UserController {
 
     @PutMapping(urlSuffix)
     @PreAuthorize("#pkUser == authentication.principal.pkUser")
-    public ResponseEntity<UserCreated> editUser(@PathVariable Long pkUser, @RequestBody @Valid UserDto userDto) {
-        UserCreated userCreated = userService.editUser(pkUser, userDto);
-        return ResponseEntity.ok().body(userCreated);
+    public ResponseEntity<UserCreated> editUser(@PathVariable Long pkUser, @RequestBody @Valid UserToBeCreated userToBeCreated) {
+        return ResponseEntity.ok().body(userService.editUser(pkUser, userToBeCreated));
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PatchMapping(urlSuffix)
-    public ResponseEntity<UserCreated> promotionUser(@PathVariable Long pkUser, @RequestBody PermissionPromotion permissionPromotion) {
-        return ResponseEntity.ok().body(userService.promotionUser(pkUser, permissionPromotion));
+    public ResponseEntity<UserCreated> promotionUser(@PathVariable Long pkUser, @RequestBody PromotionAuthorityUser promotionAuthorityUser) {
+        return ResponseEntity.ok().body(userService.promotionUser(pkUser, promotionAuthorityUser));
     }
 
     @DeleteMapping(urlSuffix)

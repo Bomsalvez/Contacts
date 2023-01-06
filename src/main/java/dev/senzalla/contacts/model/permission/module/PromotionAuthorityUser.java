@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PermissionPromotion {
+public class PromotionAuthorityUser {
     private EPermission namePermission;
 
 }

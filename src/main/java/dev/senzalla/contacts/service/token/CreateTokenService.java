@@ -13,14 +13,13 @@ import java.util.Date;
 
 @Service
 public class CreateTokenService {
+    private final UserService userService;
     @Value("${server.servlet.application-display-name}")
     private String nameApp;
     @Value("${jwt.api.secret}")
     private String authKey;
     @Value("${jwt.api.expiration}")
     private Long timeToExpiry;
-
-    private final UserService userService;
 
     @Autowired
     public CreateTokenService(UserService userService) {
