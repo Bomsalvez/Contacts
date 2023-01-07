@@ -2,6 +2,7 @@ package dev.senzalla.contacts.service.user;
 
 import dev.senzalla.contacts.model.permission.module.PromotionAuthorityUser;
 import dev.senzalla.contacts.model.user.entity.User;
+import dev.senzalla.contacts.model.user.module.RecoverAccount;
 import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserSummarize;
 import dev.senzalla.contacts.model.user.module.UserToBeCreated;
@@ -18,7 +19,7 @@ public class UserService {
     private final FindUserService findUserService;
     private final FindMultipleUserService findMultipleUserService;
     private final PromotionAuthorityUserService promotionAuthorityUserService;
-    private final DeleteUserService  deleteUserService;
+    private final DeleteUserService deleteUserService;
 
     public UserCreated createUser(UserToBeCreated userToBeCreated) {
         return createUserService.createUser(userToBeCreated);
@@ -50,5 +51,9 @@ public class UserService {
 
     public void deleteUser(Long pkUser) {
         deleteUserService.deleteUser(pkUser);
+    }
+
+    public UserCreated changePassword(RecoverAccount recoverAccount) {
+        return createUserService.changePassword(recoverAccount);
     }
 }

@@ -3,6 +3,7 @@ package dev.senzalla.contacts.service.user;
 import dev.senzalla.contacts.model.permission.entity.Permission;
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.model.user.mapper.UserMapper;
+import dev.senzalla.contacts.model.user.module.RecoverAccount;
 import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserToBeCreated;
 import dev.senzalla.contacts.repository.UserRepository;
@@ -37,16 +38,6 @@ class CreateUserService {
         }
     }
 
-    private void encodePassword(User user) {
-        String pass = passwordEncoder.encode(user.getPassword());
-        user.setPasswordUser(pass);
-    }
-
-    private void definePermissions(User user) {
-        Set<Permission> permissions = Set.of(permissionService.findPermission());
-        user.setPermissions(permissions);
-    }
-
     public UserCreated editUser(Long pkUser, UserToBeCreated userToBeCreated) {
         try {
             User user = userRepository.findById(pkUser).orElseThrow(() -> new NotFoundException("User Not Found"));
@@ -59,4 +50,23 @@ class CreateUserService {
             throw new DuplicateException(Objects.requireNonNull(ex.getRootCause()).getMessage());
         }
     }
+
+    public UserCreated changePassword(RecoverAccount recoverAccount) {
+        User user = userRepository.findUserByMailUser(recoverAccount.mail()).orElseThrow(() -> new NotFoundException("User Not Found"));
+        user.setPasswordUser(recoverAccount.password());
+        encodePassword(user);
+        user = userRepository.save(user);
+        return UserMapper.toUserCreated(user);
+    }
+
+    private void encodePassword(User user) {
+        String pass = passwordEncoder.encode(user.getPassword());
+        user.setPasswordUser(pass);
+    }
+
+    private void definePermissions(User user) {
+        Set<Permission> permissions = Set.of(permissionService.findPermission());
+        user.setPermissions(permissions);
+    }
+
 }
