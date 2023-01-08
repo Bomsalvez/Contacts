@@ -36,6 +36,12 @@ public class ResourceExceptionHandler {
         return new Error(ex.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(DateException.class)
+    public Error handle(DateException ex) {
+        return new Error(ex.getMessage());
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ExternalUser.class)
     public Error handle(ExternalUser ex) {

@@ -1,8 +1,8 @@
 package dev.senzalla.contacts.service.user;
 
 import dev.senzalla.contacts.model.permission.module.PromotionAuthorityUser;
+import dev.senzalla.contacts.model.recoveraccount.module.ResettingPassword;
 import dev.senzalla.contacts.model.user.entity.User;
-import dev.senzalla.contacts.model.user.module.RecoverAccount;
 import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserSummarize;
 import dev.senzalla.contacts.model.user.module.UserToBeCreated;
@@ -53,7 +53,7 @@ public class UserService {
         deleteUserService.deleteUser(pkUser);
     }
 
-    public UserCreated changePassword(RecoverAccount recoverAccount) {
-        return createUserService.changePassword(recoverAccount);
+    public UserCreated changePassword(ResettingPassword resettingPassword) {
+        return createUserService.changePassword(resettingPassword);
     }
 }

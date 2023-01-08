@@ -1,9 +1,9 @@
 package dev.senzalla.contacts.service.user;
 
 import dev.senzalla.contacts.model.permission.entity.Permission;
+import dev.senzalla.contacts.model.recoveraccount.module.ResettingPassword;
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.model.user.mapper.UserMapper;
-import dev.senzalla.contacts.model.user.module.RecoverAccount;
 import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserToBeCreated;
 import dev.senzalla.contacts.repository.UserRepository;
@@ -51,9 +51,9 @@ class CreateUserService {
         }
     }
 
-    public UserCreated changePassword(RecoverAccount recoverAccount) {
-        User user = userRepository.findUserByMailUser(recoverAccount.mail()).orElseThrow(() -> new NotFoundException("User Not Found"));
-        user.setPasswordUser(recoverAccount.password());
+    public UserCreated changePassword(ResettingPassword resettingPassword) {
+        User user = userRepository.findUserByMailUser(resettingPassword.mail()).orElseThrow(() -> new NotFoundException("User Not Found"));
+        user.setPasswordUser(resettingPassword.password());
         encodePassword(user);
         user = userRepository.save(user);
         return UserMapper.toUserCreated(user);

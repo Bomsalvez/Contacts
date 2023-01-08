@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <p> Ola <strong th:text="${nameUser}"></strong>
+        <br>
+        Você está tentando recuperar a senha, vou te mandar um codigo para tal feito!
+        <br>
+        O codigo sera valido por 24h
+        <br>
+        Aqui esta seu codigo
+        <spam th:text="${hashSecurity}"></spam>
+    </p>
+</div>
+</body>
+</html>

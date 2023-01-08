@@ -2,8 +2,8 @@ package dev.senzalla.contacts.model.user.mapper;
 
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.model.user.module.UserCreated;
-import dev.senzalla.contacts.model.user.module.UserToBeCreated;
 import dev.senzalla.contacts.model.user.module.UserSummarize;
+import dev.senzalla.contacts.model.user.module.UserToBeCreated;
 import org.modelmapper.ModelMapper;
 
 public class UserMapper {
