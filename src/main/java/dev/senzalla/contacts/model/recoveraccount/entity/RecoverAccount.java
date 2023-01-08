@@ -1,5 +1,6 @@
 package dev.senzalla.contacts.model.recoveraccount.entity;
 
+import dev.senzalla.contacts.model.mail.TemplateMail;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "recover_account", schema = "db_contacts")
-public class RecoverAccount {
+public class RecoverAccount implements TemplateMail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pkRecoverAccount", nullable = false)

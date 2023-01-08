@@ -25,7 +25,7 @@ public class RecoverAccountService {
 
     public void orderRecoverAccount(String mailUser) {
         RecoverAccount recoverAccount = defineUserToRecoverAccount(mailUser);
-        mailService.defineHtmlToRecoverAccount(recoverAccount);
+        mailService.sendMailToRecoverAccount(recoverAccount);
     }
 
     public UserCreated changePassword(String hash, ResettingPassword resettingPassword) {

@@ -1,5 +1,6 @@
 package dev.senzalla.contacts.model.user.entity;
 
+import dev.senzalla.contacts.model.mail.TemplateMail;
 import dev.senzalla.contacts.model.permission.entity.Permission;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -15,7 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class User implements UserDetails {
+public class User implements UserDetails, TemplateMail {
     @Id
     @Column(name = "pkUser", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

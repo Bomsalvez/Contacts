@@ -1,8 +1,10 @@
 package dev.senzalla.contacts.service.mail;
 
+import dev.senzalla.contacts.model.mail.TemplateMail;
 import dev.senzalla.contacts.model.recoveraccount.entity.RecoverAccount;
-import dev.senzalla.contacts.settings.service.ThymeleafBean;
+import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.settings.exception.EmailException;
+import dev.senzalla.contacts.settings.service.ThymeleafBean;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +30,37 @@ public class MailService {
     @Value("${spring.mail.username}")
     private String mailApp;
 
+    public void sendMailToCreateAccount(User user) {
+        String html = defineHtmlToCreateAccount(user);
+        sendMail(user, CREATE_ACCOUNT, html);
+    }
 
-    public void defineHtmlToRecoverAccount(RecoverAccount account) {
-        Map<String, Object> variablesHtml = new HashMap<>();
-        variablesHtml.put("mailUser", account.getMailUser());
-        variablesHtml.put("nameUser", account.getNameUser());
-        variablesHtml.put("hashSecurity", account.getHashSecurity());
-        String html = new ThymeleafBean().createContext("RecoverAccount.html", variablesHtml);
+    public void sendMailToRecoverAccount(RecoverAccount account) {
+        String html = defineHtmlToRecoverAccount(account);
         sendMail(account, RECOVER_ACCOUNT, html);
     }
 
-    private void sendMail(RecoverAccount account, String recoverAccount, String html) {
+    private String defineHtmlToCreateAccount(User user) {
+        Map<String, Object> variablesHtml = defineVariables(user);
+        return new ThymeleafBean().createContext("RecoverAccount.html", variablesHtml);
+    }
+
+    private String defineHtmlToRecoverAccount(RecoverAccount account) {
+        Map<String, Object> variablesHtml = defineVariables(account);
+        variablesHtml.put("hashSecurity", account.getHashSecurity());
+        variablesHtml.put("url", String.format("http://localhost:8087/contacts/account/%s", account.getHashSecurity()));
+        return new ThymeleafBean().createContext("RecoverAccount.html", variablesHtml);
+    }
+
+    private Map<String, Object> defineVariables(TemplateMail user) {
+        Map<String, Object> variablesHtml = new HashMap<>();
+        variablesHtml.put("mailUser", user.getMailUser());
+        variablesHtml.put("nameUser", user.getNameUser());
+        return variablesHtml;
+    }
+
+
+    private void sendMail(TemplateMail account, String recoverAccount, String html) {
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");

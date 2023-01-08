@@ -7,6 +7,7 @@ import dev.senzalla.contacts.model.user.mapper.UserMapper;
 import dev.senzalla.contacts.model.user.module.UserCreated;
 import dev.senzalla.contacts.model.user.module.UserToBeCreated;
 import dev.senzalla.contacts.repository.UserRepository;
+import dev.senzalla.contacts.service.mail.MailService;
 import dev.senzalla.contacts.service.permission.PermissionService;
 import dev.senzalla.contacts.settings.exception.DuplicateException;
 import dev.senzalla.contacts.settings.exception.NotFoundException;
@@ -25,6 +26,7 @@ class CreateUserService {
     private final PasswordEncoder passwordEncoder;
     private final PermissionService permissionService;
     private final UserRepository userRepository;
+    private final MailService mailService;
 
     public UserCreated createUser(UserToBeCreated userToBeCreated) {
         try {
@@ -32,6 +34,7 @@ class CreateUserService {
             definePermissions(user);
             encodePassword(user);
             user = userRepository.save(user);
+            mailService.sendMailToCreateAccount(user);
             return UserMapper.toUserCreated(user);
         } catch (DataIntegrityViolationException ex) {
             throw new DuplicateException(Objects.requireNonNull(ex.getRootCause()).getMessage());
