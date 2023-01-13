@@ -33,7 +33,6 @@ public class CreateTokenService {
 
         return Jwts.builder().setIssuer(nameApp).setSubject(user.getPkUser().toString())
                 .setIssuedAt(today)
-                .claim("name", user.getNameUser()).claim("mail", user.getMailUser())
                 .setExpiration(timeExpiry)
                 .signWith(SignatureAlgorithm.HS512, authKey)
                 .compact();

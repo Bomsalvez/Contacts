@@ -21,14 +21,13 @@ public class MailService {
     private static final String CREATE_ACCOUNT = "Bem Vinda!";
     private static final String RECOVER_ACCOUNT = "Ola Novamente!";
     private final JavaMailSender javaMailSender;
+    @Value("${spring.mail.username}")
+    private String mailApp;
 
     @Autowired
     public MailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
-
-    @Value("${spring.mail.username}")
-    private String mailApp;
 
     public void sendMailToCreateAccount(User user) {
         String html = defineHtmlToCreateAccount(user);

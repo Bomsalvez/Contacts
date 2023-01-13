@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserToBeCreated {
+public class UserCreating {
     @NotBlank
     private String nameUser;
     @Email

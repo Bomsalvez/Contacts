@@ -11,7 +11,7 @@ class SearchTokenService {
     private String authKey;
 
     public boolean checkValidToken(String token) {
-        if (token != null) {
+        if (token != null ) {
             Jwts.parser().setSigningKey(authKey).parseClaimsJws(token);
             return true;
         }
@@ -21,5 +21,12 @@ class SearchTokenService {
     public Long getIdUser(String token) {
         Claims claims = Jwts.parser().setSigningKey(authKey).parseClaimsJws(token).getBody();
         return Long.valueOf(claims.getSubject());
+    }
+
+    public String extractToken(String token) {
+        if (token != null && token.startsWith("Bearer")) {
+            return token.substring(7);
+        }
+        return null;
     }
 }
