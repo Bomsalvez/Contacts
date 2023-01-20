@@ -9,8 +9,13 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ContactService {
     private final SaveContactService saveContactService;
+    private final FindContactService findContactService;
 
     public ContactsDto addContact(ContactsDto contactsDto) {
         return saveContactService.addContact(contactsDto);
+    }
+
+    public ContactsDto findContact(Long pkContact) {
+        return findContactService.findContact(pkContact);
     }
 }
