@@ -6,10 +6,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
@@ -27,16 +29,17 @@ public class WebSecurity {
 
         http = http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
 
-        http.authorizeHttpRequests().anyRequest().permitAll();
-//        http.authorizeHttpRequests()
-//                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-//                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-//                .requestMatchers(HttpMethod.POST, "/user").permitAll()
-//                .requestMatchers("/account/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and().addFilterBefore(
-//                        new AuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class
-//                );
+//        http.authorizeHttpRequests().anyRequest().permitAll();
+        http.authorizeHttpRequests()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+                .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                .requestMatchers(HttpMethod.GET, "/contact").permitAll()
+                .requestMatchers("/account/**").permitAll()
+                .anyRequest().authenticated()
+                .and().addFilterBefore(
+                        new AuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class
+                );
 
         return http.build();
     }

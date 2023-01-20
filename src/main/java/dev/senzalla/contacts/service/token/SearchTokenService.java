@@ -22,4 +22,11 @@ class SearchTokenService {
         Claims claims = Jwts.parser().setSigningKey(authKey).parseClaimsJws(token).getBody();
         return Long.valueOf(claims.getSubject());
     }
+
+    public String extractToken(String token) {
+        if (token != null && token.startsWith("Bearer")) {
+            return token.substring(7);
+        }
+        return null;
+    }
 }

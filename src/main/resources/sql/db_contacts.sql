@@ -72,3 +72,12 @@ create table if not exists user_permission (
     foreign key (fkUser) references user (pkUser),
     foreign key (fkPermission) references permission (pkPermission)
 );
+
+drop table if exists recover_account;
+create table recover_account (
+    pkRecoverAccount int auto_increment primary key,
+    expirationDate datetime(6) not null,
+    hashSecurity varchar(32) not null,
+    mailUser varchar(255) not null,
+    nameUser varchar(255) not null
+);

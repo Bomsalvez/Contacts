@@ -22,4 +22,8 @@ public class TokenService {
     public Long getIdUser(String token) {
         return searchTokenService.getIdUser(token);
     }
+
+    public String extractToken(String token) {
+        return searchTokenService.extractToken(token);
+    }
 }

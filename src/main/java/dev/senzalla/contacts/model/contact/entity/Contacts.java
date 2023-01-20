@@ -40,7 +40,7 @@ public class Contacts {
     @OneToMany(mappedBy = "contacts", cascade = CascadeType.REFRESH)
     private Set<Mail> mails;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "address_contact",
             joinColumns = @JoinColumn(name = "fkContact"),
             inverseJoinColumns = @JoinColumn(name = "fkAddress"))
