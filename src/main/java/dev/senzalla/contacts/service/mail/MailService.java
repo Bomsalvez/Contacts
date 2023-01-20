@@ -1,6 +1,6 @@
 package dev.senzalla.contacts.service.mail;
 
-import dev.senzalla.contacts.model.mail.TemplateMail;
+import dev.senzalla.contacts.model.mail.template.TemplateMail;
 import dev.senzalla.contacts.model.recoveraccount.entity.RecoverAccount;
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.settings.exception.EmailException;

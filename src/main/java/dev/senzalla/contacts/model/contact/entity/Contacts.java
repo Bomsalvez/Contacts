@@ -1,5 +1,6 @@
 package dev.senzalla.contacts.model.contact.entity;
 
+import dev.senzalla.contacts.model.phonenumber.entity.Phonenumber;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,4 +31,7 @@ public class Contacts {
     @Size(max = 30)
     @Column(name = "nicknameContact", length = 30)
     private String nicknameContact;
+
+    @OneToMany(mappedBy = "contacts",cascade = CascadeType.REFRESH)
+    private Set<Phonenumber> phonenumbers;
 }

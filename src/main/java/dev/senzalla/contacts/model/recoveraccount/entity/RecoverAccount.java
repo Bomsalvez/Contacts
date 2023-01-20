@@ -1,6 +1,6 @@
 package dev.senzalla.contacts.model.recoveraccount.entity;
 
-import dev.senzalla.contacts.model.mail.TemplateMail;
+import dev.senzalla.contacts.model.mail.template.TemplateMail;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,10 +17,10 @@ public class RecoverAccount implements TemplateMail {
     @Column(name = "pkRecoverAccount", nullable = false)
     private Long pkRecoverAccount;
     @Basic
-    @Column(name = "nameUser", nullable = false, length = 255)
+    @Column(name = "nameUser", nullable = false)
     private String nameUser;
     @Basic
-    @Column(name = "mailUser", nullable = false, length = 255)
+    @Column(name = "mailUser", nullable = false)
     private String mailUser;
     @Basic
     @Column(name = "hashSecurity", nullable = false, length = 32)

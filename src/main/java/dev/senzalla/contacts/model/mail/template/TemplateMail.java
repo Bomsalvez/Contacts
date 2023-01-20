@@ -1,4 +1,4 @@
-package dev.senzalla.contacts.model.mail;
+package dev.senzalla.contacts.model.mail.template;
 
 public interface TemplateMail {
     String getMailUser();

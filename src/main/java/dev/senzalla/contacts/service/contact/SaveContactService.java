@@ -4,6 +4,7 @@ import dev.senzalla.contacts.model.contact.entity.Contacts;
 import dev.senzalla.contacts.model.contact.mapper.ContactsMapper;
 import dev.senzalla.contacts.model.contact.module.ContactsDto;
 import dev.senzalla.contacts.repository.ContactsRepository;
+import dev.senzalla.contacts.service.phonenumber.PhonenumberService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,13 @@ import java.util.Optional;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 class SaveContactService {
     private final ContactsRepository contactsRepository;
+    private final PhonenumberService phonenumberService;
 
     public ContactsDto addContact(ContactsDto contactsDto) {
         Contacts contacts = ContactsMapper.toContacts(contactsDto);
         checkContactExist(contacts);
-        contacts = contactsRepository.save(contacts);
+        contactsRepository.save(contacts);
+        phonenumberService.addPhonenumberToContact(contactsDto.getPhonenumbers(), contacts);
         return ContactsMapper.toContactsDto(contacts);
     }
 

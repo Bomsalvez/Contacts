@@ -1,6 +1,6 @@
 package dev.senzalla.contacts.model.user.entity;
 
-import dev.senzalla.contacts.model.mail.TemplateMail;
+import dev.senzalla.contacts.model.mail.template.TemplateMail;
 import dev.senzalla.contacts.model.permission.entity.Permission;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
