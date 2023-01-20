@@ -1,5 +1,7 @@
 package dev.senzalla.contacts.model.contact.entity;
 
+import dev.senzalla.contacts.model.address.entity.Address;
+import dev.senzalla.contacts.model.mail.entity.Mail;
 import dev.senzalla.contacts.model.phonenumber.entity.Phonenumber;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -32,6 +34,15 @@ public class Contacts {
     @Column(name = "nicknameContact", length = 30)
     private String nicknameContact;
 
-    @OneToMany(mappedBy = "contacts",cascade = CascadeType.REFRESH)
+    @OneToMany(mappedBy = "contacts", cascade = CascadeType.REFRESH)
     private Set<Phonenumber> phonenumbers;
+
+    @OneToMany(mappedBy = "contacts", cascade = CascadeType.REFRESH)
+    private Set<Mail> mails;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "address_contact",
+            joinColumns = @JoinColumn(name = "fkContact"),
+            inverseJoinColumns = @JoinColumn(name = "fkAddress"))
+    private Set<Address> addresses;
 }

@@ -1,5 +1,7 @@
 package dev.senzalla.contacts.model.contact.module;
 
+import dev.senzalla.contacts.model.address.module.AddressDto;
+import dev.senzalla.contacts.model.mail.module.MailDto;
 import dev.senzalla.contacts.model.phonenumber.module.PhonenumberDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -27,4 +29,10 @@ public class ContactsDto {
 
     @Valid
     private Set<PhonenumberDto> phonenumbers;
+
+    @Valid
+    private Set<MailDto> mails;
+
+    @Valid
+    private Set<AddressDto> addresses;
 }

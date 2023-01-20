@@ -1,29 +1,27 @@
-package dev.senzalla.contacts.model.phonenumber.entity;
+package dev.senzalla.contacts.model.mail.entity;
 
 import dev.senzalla.contacts.model.contact.entity.Contacts;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-public class Phonenumber {
+public class Mail {
     @Id
-    @Column(name = "pkPhoneNumber", nullable = false)
+    @Column(name = "pkMail", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pkPhoneNumber;
+    private Long pkMail;
 
     @NotBlank
-    @Pattern(regexp = "[0-9]{11,15}")
-    @Column(name = "phoneNumber", nullable = false, length = 15)
-    private String phoneNumber;
+    @Column(name = "mail", nullable = false)
+    private String mail;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tagPhone")
-    private TagPhone tagPhone;
+    @Column(name = "tagMail")
+    private TagMail tagMail;
 
     @ManyToOne
     @JoinColumn(name = "fkContact", referencedColumnName = "pkContact", nullable = false)
