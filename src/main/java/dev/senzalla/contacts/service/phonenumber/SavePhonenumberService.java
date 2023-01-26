@@ -20,7 +20,9 @@ class SavePhonenumberService {
     private final PhonenumberRepository phonenumberRepository;
 
     public void addPhonenumberToContact(Set<PhonenumberDto> phonenumbersDto, Contacts contacts) {
-        phonenumbersDto.stream().map(PhonenumberMapper::toPhonenumber).forEach(phonenumber -> addPhonenumber(phonenumber, contacts));
+        if (phonenumbersDto != null) {
+            phonenumbersDto.stream().map(PhonenumberMapper::toPhonenumber).forEach(phonenumber -> addPhonenumber(phonenumber, contacts));
+        }
     }
 
     private void addPhonenumber(Phonenumber phonenumber, Contacts contacts) {

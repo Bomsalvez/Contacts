@@ -20,9 +20,8 @@ class SaveMailService {
     private final MailRepository mailRepository;
 
     public void addMailToContact(Set<MailDto> mailsDto, Contacts contacts) {
-        for (MailDto mailDto : mailsDto) {
-            Mail mail = MailMapper.toMail(mailDto);
-            addMail(mail, contacts);
+        if (mailsDto != null) {
+            mailsDto.stream().map(MailMapper::toMail).forEach(mail -> addMail(mail, contacts));
         }
     }
 

@@ -22,14 +22,24 @@ class SaveContactService {
     public ContactsDto addContact(ContactsDto contactsDto) {
         Contacts contacts = ContactsMapper.toContacts(contactsDto);
         checkContactExist(contacts);
-        contactsRepository.save(contacts);
-        phonenumberService.addPhonenumberToContact(contactsDto.getPhonenumbers(), contacts);
-        mailService.addMailToContact(contactsDto.getMails(), contacts);
-        return ContactsMapper.toContactsDto(contacts);
+        return saveContact(contacts, contactsDto);
+    }
+
+    public ContactsDto editContact(ContactsDto contactsDto, Long pkContact) {
+        Contacts contacts = ContactsMapper.toContacts(contactsDto);
+        contacts.setPkContact(pkContact);
+        return saveContact(contacts, contactsDto);
     }
 
     private void checkContactExist(Contacts contacts) {
         Optional<Contacts> oldContacts = contactsRepository.findByNameContactIgnoreCaseAndNicknameContactIgnoreCaseAndDateBirthContact(contacts.getNameContact(), contacts.getNicknameContact(), contacts.getDateBirthContact());
         oldContacts.ifPresent(value -> contacts.setPkContact(value.getPkContact()));
+    }
+
+    private ContactsDto saveContact(Contacts contacts, ContactsDto contactsDto) {
+        contactsRepository.save(contacts);
+        phonenumberService.addPhonenumberToContact(contactsDto.getPhonenumbers(), contacts);
+        mailService.addMailToContact(contactsDto.getMails(), contacts);
+        return ContactsMapper.toContactsDto(contacts);
     }
 }

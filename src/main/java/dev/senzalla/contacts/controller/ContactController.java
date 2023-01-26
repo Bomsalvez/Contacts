@@ -46,4 +46,18 @@ public class ContactController {
             @RequestHeader(value = "Authorization", required = false) String token) {
         return ResponseEntity.ok().body(contactService.findMultipleContact(pageable, nameContact, token));
     }
+
+    @Transactional
+    @PutMapping(urlSuffix)
+    @PreAuthorize("hasAnyAuthority('ADMIN','CREATE')")
+    public ResponseEntity<ContactsDto> editContact(@RequestBody @Valid ContactsDto contactsDto, @PathVariable Long pkContact) {
+        return ResponseEntity.ok().body(contactService.editContact(contactsDto, pkContact));
+    }
+
+    @DeleteMapping(urlSuffix)
+    @PreAuthorize("hasAnyAuthority('ADMIN','CREATE')")
+    public ResponseEntity<?> deleteContact(@PathVariable Long pkContact) {
+        contactService.deleteContact(pkContact);
+        return ResponseEntity.noContent().build();
+    }
 }

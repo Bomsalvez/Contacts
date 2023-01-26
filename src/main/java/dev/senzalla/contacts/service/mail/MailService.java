@@ -1,6 +1,7 @@
 package dev.senzalla.contacts.service.mail;
 
 import dev.senzalla.contacts.model.contact.entity.Contacts;
+import dev.senzalla.contacts.model.mail.entity.Mail;
 import dev.senzalla.contacts.model.mail.module.MailDto;
 import dev.senzalla.contacts.model.recoveraccount.entity.RecoverAccount;
 import dev.senzalla.contacts.model.user.entity.User;
@@ -15,6 +16,7 @@ import java.util.Set;
 public class MailService {
     private final SendMailService sendMailService;
     private final SaveMailService saveMailService;
+    private final DeleteMail deleteMail;
 
     public void sendMailToCreateAccount(User user) {
         sendMailService.sendMailToCreateAccount(user);
@@ -26,5 +28,9 @@ public class MailService {
 
     public void addMailToContact(Set<MailDto> mails, Contacts contacts) {
         saveMailService.addMailToContact(mails, contacts);
+    }
+
+    public void deleteMail(Set<Mail> mails) {
+        deleteMail.delete(mails);
     }
 }

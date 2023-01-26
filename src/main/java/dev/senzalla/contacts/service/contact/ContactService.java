@@ -14,6 +14,7 @@ public class ContactService {
     private final SaveContactService saveContactService;
     private final FindContactService findContactService;
     private final FindMultipleContactService findMultipleContactService;
+    private final DeleteContactService deleteContactService;
 
     public ContactsDto addContact(ContactsDto contactsDto) {
         return saveContactService.addContact(contactsDto);
@@ -25,5 +26,13 @@ public class ContactService {
 
     public Page<ContactList> findMultipleContact(Pageable pageable, String nameContact, String token) {
         return findMultipleContactService.findMultipleContact(pageable, nameContact, token);
+    }
+
+    public ContactsDto editContact(ContactsDto contactsDto, Long pkContact) {
+        return saveContactService.editContact(contactsDto, pkContact);
+    }
+
+    public void deleteContact(Long pkContact) {
+        deleteContactService.delete(pkContact);
     }
 }
