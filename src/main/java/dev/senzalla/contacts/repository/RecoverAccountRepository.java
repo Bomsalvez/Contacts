@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface RecoverAccountRepository extends JpaRepository<RecoverAccount, Long> {
 
-    Optional<RecoverAccount> findByHashSecurityAndMailUser(String hash, String mailUser);
+    Optional<RecoverAccount> findByHashSecurityAndMailUser(String hash,String mailUser);
 }

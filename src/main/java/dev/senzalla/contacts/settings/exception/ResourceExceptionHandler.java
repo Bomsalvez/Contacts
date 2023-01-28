@@ -24,7 +24,7 @@ public class ResourceExceptionHandler {
         return new Error(ex.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.MULTIPLE_CHOICES)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(DuplicateException.class)
     public Error handle(DuplicateException ex) {
         return new Error(ex.getMessage());
@@ -37,12 +37,6 @@ public class ResourceExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(JwtException.class)
-    public Error handle(JwtException ex) {
-        return new Error(ex.getMessage());
-    }
-
-    @ResponseStatus(HttpStatus.BAD_GATEWAY)
     @ExceptionHandler(DateException.class)
     public Error handle(DateException ex) {
         return new Error(ex.getMessage());

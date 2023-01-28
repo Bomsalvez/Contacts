@@ -11,7 +11,7 @@ class SearchTokenService {
     private String authKey;
 
     public boolean checkValidToken(String token) {
-        if (token != null ) {
+        if (token != null) {
             Jwts.parser().setSigningKey(authKey).parseClaimsJws(token);
             return true;
         }
