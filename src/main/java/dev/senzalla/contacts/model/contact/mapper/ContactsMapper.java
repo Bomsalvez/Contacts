@@ -1,6 +1,7 @@
 package dev.senzalla.contacts.model.contact.mapper;
 
 import dev.senzalla.contacts.model.contact.entity.Contacts;
+import dev.senzalla.contacts.model.contact.module.ContactsCreated;
 import dev.senzalla.contacts.model.contact.module.ContactsDto;
 import dev.senzalla.contacts.model.contact.module.ContactsMinimal;
 import dev.senzalla.contacts.model.contact.module.ContactsSummarize;
@@ -11,8 +12,8 @@ public class ContactsMapper extends ModelMapperBean {
         return mapper.map(contactsDto, Contacts.class);
     }
 
-    public static ContactsDto toContactsDto(Contacts contacts) {
-        return mapper.map(contacts, ContactsDto.class);
+    public static ContactsCreated toContactsCreated(Contacts contacts) {
+        return mapper.map(contacts, ContactsCreated.class);
     }
 
     public static ContactsMinimal toContactsMinimal(Contacts contacts) {

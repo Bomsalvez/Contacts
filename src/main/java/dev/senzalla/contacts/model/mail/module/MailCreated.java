@@ -10,7 +10,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class MailDto {
+public class MailCreated {
+    private Long pkMail;
     @NotBlank
     private String mail;
     private TagMail tagMail;

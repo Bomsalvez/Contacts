@@ -10,7 +10,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class AddressDto {
+public class AddressCreated {
+    private Long pkAddress;
     @Pattern(regexp = "[0-9]{8,12}")
     private String codeAddress;
     @NotBlank

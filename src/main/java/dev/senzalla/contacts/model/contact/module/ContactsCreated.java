@@ -1,8 +1,8 @@
 package dev.senzalla.contacts.model.contact.module;
 
-import dev.senzalla.contacts.model.address.module.AddressDto;
-import dev.senzalla.contacts.model.mail.module.MailDto;
-import dev.senzalla.contacts.model.phonenumber.module.PhonenumberDto;
+import dev.senzalla.contacts.model.address.module.AddressCreated;
+import dev.senzalla.contacts.model.mail.module.MailCreated;
+import dev.senzalla.contacts.model.phonenumber.module.PhonenumberCreated;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -15,7 +15,8 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class ContactsDto {
+public class ContactsCreated {
+    private Long pkContact;
 
     @NotBlank
     private String nameContact;
@@ -27,11 +28,11 @@ public class ContactsDto {
     private String nicknameContact;
 
     @Valid
-    private Set<PhonenumberDto> phonenumbers;
+    private Set<PhonenumberCreated> phonenumbers;
 
     @Valid
-    private Set<MailDto> mails;
+    private Set<MailCreated> mails;
 
     @Valid
-    private Set<AddressDto> addresses;
+    private Set<AddressCreated> addresses;
 }

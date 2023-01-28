@@ -1,6 +1,7 @@
 package dev.senzalla.contacts.service.contact;
 
 import dev.senzalla.contacts.model.contact.module.ContactList;
+import dev.senzalla.contacts.model.contact.module.ContactsCreated;
 import dev.senzalla.contacts.model.contact.module.ContactsDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,11 @@ public class ContactService {
     private final FindMultipleContactService findMultipleContactService;
     private final DeleteContactService deleteContactService;
 
-    public ContactsDto addContact(ContactsDto contactsDto) {
+    public ContactsCreated addContact(ContactsDto contactsDto) {
         return saveContactService.addContact(contactsDto);
     }
 
-    public ContactsDto findContact(Long pkContact) {
+    public ContactsCreated findContact(Long pkContact) {
         return findContactService.findContact(pkContact);
     }
 
@@ -28,7 +29,7 @@ public class ContactService {
         return findMultipleContactService.findMultipleContact(pageable, nameContact, token);
     }
 
-    public ContactsDto editContact(ContactsDto contactsDto, Long pkContact) {
+    public ContactsCreated editContact(ContactsDto contactsDto, Long pkContact) {
         return saveContactService.editContact(contactsDto, pkContact);
     }
 

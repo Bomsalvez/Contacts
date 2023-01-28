@@ -2,7 +2,7 @@ package dev.senzalla.contacts.service.contact;
 
 import dev.senzalla.contacts.model.contact.entity.Contacts;
 import dev.senzalla.contacts.model.contact.mapper.ContactsMapper;
-import dev.senzalla.contacts.model.contact.module.ContactsDto;
+import dev.senzalla.contacts.model.contact.module.ContactsCreated;
 import dev.senzalla.contacts.repository.ContactsRepository;
 import dev.senzalla.contacts.settings.exception.NotFoundException;
 import lombok.AllArgsConstructor;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 class FindContactService {
     private final ContactsRepository contactsRepository;
 
-    public ContactsDto findContact(Long pkContact) {
+    public ContactsCreated findContact(Long pkContact) {
         Contacts contacts = contactsRepository.findByPkContact(pkContact).orElseThrow(() -> new NotFoundException("Contato não encontrado"));
-        return ContactsMapper.toContactsDto(contacts);
+        return ContactsMapper.toContactsCreated(contacts);
     }
 }
