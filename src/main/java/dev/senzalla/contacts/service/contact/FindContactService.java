@@ -11,11 +11,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-class FindContactService {
+public class FindContactService {
     private final ContactsRepository contactsRepository;
 
-    public ContactsCreated findContact(Long pkContact) {
-        Contacts contacts = contactsRepository.findByPkContact(pkContact).orElseThrow(() -> new NotFoundException("Contato não encontrado"));
+    public ContactsCreated findContactDto(Long pkContact) {
+        Contacts contacts = findContact(pkContact);
         return ContactsMapper.toContactsCreated(contacts);
+    }
+
+    public Contacts findContact(Long pkContact) {
+        return contactsRepository.findByPkContact(pkContact).orElseThrow(() -> new NotFoundException("Contato não encontrado"));
     }
 }

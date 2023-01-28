@@ -16,4 +16,8 @@ class DeletePhonenumberService {
     public void delete(Set<Phonenumber> phonenumbers) {
         phonenumberRepository.deleteAll(phonenumbers);
     }
+
+    public void deletePhoneToContact(Long pkContact, Long pkPhonenumber) {
+        phonenumberRepository.deletePhoneToContact(pkContact, pkPhonenumber);
+    }
 }

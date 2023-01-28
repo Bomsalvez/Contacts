@@ -1,6 +1,7 @@
 package dev.senzalla.contacts.service.phonenumber;
 
 import dev.senzalla.contacts.model.contact.entity.Contacts;
+import dev.senzalla.contacts.model.contact.module.ContactsCreated;
 import dev.senzalla.contacts.model.phonenumber.entity.Phonenumber;
 import dev.senzalla.contacts.model.phonenumber.module.PhonenumberDto;
 import lombok.AllArgsConstructor;
@@ -21,5 +22,13 @@ public class PhonenumberService {
 
     public void deletePhonenumber(Set<Phonenumber> phonenumbers) {
         deletePhonenumberService.delete(phonenumbers);
+    }
+
+    public ContactsCreated addPhonenumberToContact(Long pkContact, Set<PhonenumberDto> phonenumberDtos) {
+        return savePhonenumberService.addPhonenumberToContact(pkContact, phonenumberDtos);
+    }
+
+    public void deletePhoneToContact(Long pkContact, Long pkPhonenumber) {
+        deletePhonenumberService.deletePhoneToContact(pkContact, pkPhonenumber);
     }
 }

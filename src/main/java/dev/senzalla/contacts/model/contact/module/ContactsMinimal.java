@@ -1,6 +1,6 @@
 package dev.senzalla.contacts.model.contact.module;
 
-import dev.senzalla.contacts.model.phonenumber.module.PhonenumberDto;
+import dev.senzalla.contacts.model.phonenumber.module.PhonenumberCreated;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,5 +16,5 @@ public class ContactsMinimal implements ContactList {
     private Long pkContact;
     @NotBlank
     private String nameContact;
-    private Set<PhonenumberDto> phonenumbers;
+    private Set<PhonenumberCreated> phonenumbers;
 }

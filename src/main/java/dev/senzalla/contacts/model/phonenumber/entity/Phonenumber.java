@@ -3,7 +3,6 @@ package dev.senzalla.contacts.model.phonenumber.entity;
 import dev.senzalla.contacts.model.contact.entity.Contacts;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +16,6 @@ public class Phonenumber {
     private Long pkPhoneNumber;
 
     @NotBlank
-    @Pattern(regexp = "[0-9]{11,15}")
     @Column(name = "phoneNumber", nullable = false, length = 15)
     private String phoneNumber;
 

@@ -21,8 +21,8 @@ public class ContactService {
         return saveContactService.addContact(contactsDto);
     }
 
-    public ContactsCreated findContact(Long pkContact) {
-        return findContactService.findContact(pkContact);
+    public ContactsCreated findContactDto(Long pkContact) {
+        return findContactService.findContactDto(pkContact);
     }
 
     public Page<ContactList> findMultipleContact(Pageable pageable, String nameContact, String token) {

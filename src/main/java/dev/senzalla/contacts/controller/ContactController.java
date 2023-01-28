@@ -37,7 +37,7 @@ public class ContactController {
 
     @GetMapping(urlSuffix)
     public ResponseEntity<ContactsCreated> findContact(@PathVariable Long pkContact) {
-        return ResponseEntity.ok().body(contactService.findContact(pkContact));
+        return ResponseEntity.ok().body(contactService.findContactDto(pkContact));
     }
 
     @GetMapping
