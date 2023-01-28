@@ -5,7 +5,7 @@ import dev.senzalla.contacts.model.recoveraccount.module.ResettingPassword;
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.model.user.mapper.UserMapper;
 import dev.senzalla.contacts.model.user.module.UserCreated;
-import dev.senzalla.contacts.model.user.module.UserToBeCreated;
+import dev.senzalla.contacts.model.user.module.UserCreating;
 import dev.senzalla.contacts.repository.UserRepository;
 import dev.senzalla.contacts.service.mail.MailService;
 import dev.senzalla.contacts.service.permission.PermissionService;
@@ -28,9 +28,9 @@ class CreateUserService {
     private final UserRepository userRepository;
     private final MailService mailService;
 
-    public UserCreated createUser(UserToBeCreated userToBeCreated) {
+    public UserCreated createUser(UserCreating userCreating) {
         try {
-            User user = UserMapper.toUser(userToBeCreated);
+            User user = UserMapper.toUser(userCreating);
             definePermissions(user);
             encodePassword(user);
             user = userRepository.save(user);
@@ -41,12 +41,12 @@ class CreateUserService {
         }
     }
 
-    public UserCreated editUser(Long pkUser, UserToBeCreated userToBeCreated) {
+    public UserCreated editUser(Long pkUser, UserCreating userCreating) {
         try {
             User user = userRepository.findById(pkUser).orElseThrow(() -> new NotFoundException("User Not Found"));
             encodePassword(user);
-            user.setNameUser(userToBeCreated.getNameUser());
-            user.setMailUser(userToBeCreated.getMailUser());
+            user.setNameUser(userCreating.getNameUser());
+            user.setMailUser(userCreating.getMailUser());
             user = userRepository.save(user);
             return UserMapper.toUserCreated(user);
         } catch (DataIntegrityViolationException ex) {

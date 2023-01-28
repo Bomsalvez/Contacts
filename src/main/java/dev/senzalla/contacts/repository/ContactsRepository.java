@@ -1,6 +1,6 @@
 package dev.senzalla.contacts.repository;
 
-import dev.senzalla.contacts.model.contact.entity.Contacts;
+import dev.senzalla.contacts.model.contacts.entity.Contacts;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,10 +13,7 @@ import java.util.Optional;
 
 @Repository
 public interface ContactsRepository extends JpaRepository<Contacts, Long> {
-    Optional<Contacts> findByNameContactIgnoreCaseAndNicknameContactIgnoreCaseAndDateBirthContact(String nameContact, String nicknameContact, LocalDate dateBirthContact);
-
-    @Query("select c from Contacts c left join c.phonenumbers p left join c.mails m left join c.addresses a where c.pkContact = :pkContact")
-    Optional<Contacts> findByPkContact(Long pkContact);
+    Optional<Contacts> findByNameContactAndDateBirthContactOrNicknameContact(String nameContact, LocalDate dateBirthContact, String nicknameContact);
 
     @Query("select c from Contacts c where (:nameContact is null or lower(c.nameContact) like lower(concat('%',:nameContact,'%')))")
     Page<Contacts> findByNameContact(Pageable pageable, @Param("nameContact") String nameContact);

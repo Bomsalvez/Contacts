@@ -1,7 +1,6 @@
 package dev.senzalla.contacts.controller;
 
 import dev.senzalla.contacts.model.contact.module.ContactList;
-import dev.senzalla.contacts.model.contact.module.ContactsCreated;
 import dev.senzalla.contacts.model.contact.module.ContactsDto;
 import dev.senzalla.contacts.service.contact.ContactService;
 import jakarta.transaction.Transactional;
@@ -29,14 +28,14 @@ public class ContactController {
     @PostMapping
     @Transactional
     @PreAuthorize("hasAnyAuthority('ADMIN','CREATE')")
-    public ResponseEntity<ContactsCreated> addContact(@RequestBody @Valid ContactsDto contactsDto, UriComponentsBuilder builder) {
-        ContactsCreated dto = contactService.addContact(contactsDto);
+    public ResponseEntity<ContactsDto> addContact(@RequestBody @Valid ContactsDto contactsDto, UriComponentsBuilder builder) {
+        ContactsDto dto = contactService.addContact(contactsDto);
         URI uri = builder.path("/contact/{pkContact}").buildAndExpand(dto.getPkContact()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
 
     @GetMapping(urlSuffix)
-    public ResponseEntity<ContactsCreated> findContact(@PathVariable Long pkContact) {
+    public ResponseEntity<ContactsDto> findContact(@PathVariable Long pkContact) {
         return ResponseEntity.ok().body(contactService.findContact(pkContact));
     }
 
@@ -51,7 +50,7 @@ public class ContactController {
     @Transactional
     @PutMapping(urlSuffix)
     @PreAuthorize("hasAnyAuthority('ADMIN','CREATE')")
-    public ResponseEntity<ContactsCreated> editContact(@RequestBody @Valid ContactsDto contactsDto, @PathVariable Long pkContact) {
+    public ResponseEntity<ContactsDto> editContact(@RequestBody @Valid ContactsDto contactsDto, @PathVariable Long pkContact) {
         return ResponseEntity.ok().body(contactService.editContact(contactsDto, pkContact));
     }
 
