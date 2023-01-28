@@ -2,8 +2,8 @@ package dev.senzalla.contacts.model.user.mapper;
 
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.model.user.module.UserCreated;
-import dev.senzalla.contacts.model.user.module.UserCreating;
 import dev.senzalla.contacts.model.user.module.UserSummarize;
+import dev.senzalla.contacts.model.user.module.UserToBeCreated;
 import org.modelmapper.ModelMapper;
 
 public class UserMapper {
@@ -16,8 +16,8 @@ public class UserMapper {
     private UserMapper() {
     }
 
-    public static User toUser(UserCreating userCreating) {
-        return mapper.map(userCreating, User.class);
+    public static User toUser(UserToBeCreated userToBeCreated) {
+        return mapper.map(userToBeCreated, User.class);
     }
 
     public static UserCreated toUserCreated(User user) {

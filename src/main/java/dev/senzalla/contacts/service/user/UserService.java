@@ -4,8 +4,8 @@ import dev.senzalla.contacts.model.permission.module.PromotionAuthorityUser;
 import dev.senzalla.contacts.model.recoveraccount.module.ResettingPassword;
 import dev.senzalla.contacts.model.user.entity.User;
 import dev.senzalla.contacts.model.user.module.UserCreated;
-import dev.senzalla.contacts.model.user.module.UserCreating;
 import dev.senzalla.contacts.model.user.module.UserSummarize;
+import dev.senzalla.contacts.model.user.module.UserToBeCreated;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,8 +21,8 @@ public class UserService {
     private final PromotionAuthorityUserService promotionAuthorityUserService;
     private final DeleteUserService deleteUserService;
 
-    public UserCreated createUser(UserCreating userCreating) {
-        return createUserService.createUser(userCreating);
+    public UserCreated createUser(UserToBeCreated userToBeCreated) {
+        return createUserService.createUser(userToBeCreated);
     }
 
     public UserCreated findUserCreated(Long pkUser) {
@@ -41,8 +41,8 @@ public class UserService {
         return findMultipleUserService.findMultipleUser(pageable, nameUser, mailUser);
     }
 
-    public UserCreated editUser(Long pkUser, UserCreating userCreating) {
-        return createUserService.editUser(pkUser, userCreating);
+    public UserCreated editUser(Long pkUser, UserToBeCreated userToBeCreated) {
+        return createUserService.editUser(pkUser, userToBeCreated);
     }
 
     public UserCreated promotionUser(Long pkUser, PromotionAuthorityUser promotionAuthorityUser) {

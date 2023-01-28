@@ -34,8 +34,8 @@ public class WebSecurity {
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                 .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                .requestMatchers(HttpMethod.GET, "/contact").permitAll()
                 .requestMatchers("/account/**").permitAll()
-                .requestMatchers(HttpMethod.GET,"/contact").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(
                         new AuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class

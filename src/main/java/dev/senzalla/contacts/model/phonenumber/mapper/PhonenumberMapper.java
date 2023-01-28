@@ -8,8 +8,4 @@ public class PhonenumberMapper extends ModelMapperBean {
     public static Phonenumber toPhonenumber(PhonenumberDto phonenumberDto) {
         return mapper.map(phonenumberDto, Phonenumber.class);
     }
-
-    public static PhonenumberDto toPhonenumberDto(Phonenumber phonenumber) {
-        return mapper.map(phonenumber, PhonenumberDto.class);
-    }
 }
