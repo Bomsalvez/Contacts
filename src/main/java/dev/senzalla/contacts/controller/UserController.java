@@ -49,18 +49,21 @@ public class UserController {
         return ResponseEntity.ok().body(userService.findListUser(pageable, nameUser, mailUser));
     }
 
+    @Transactional
     @PutMapping(urlSuffix)
     @PreAuthorize("#pkUser == authentication.principal.pkUser")
     public ResponseEntity<UserCreated> editUser(@PathVariable Long pkUser, @RequestBody @Valid UserToBeCreated userToBeCreated) {
         return ResponseEntity.ok().body(userService.editUser(pkUser, userToBeCreated));
     }
 
+    @Transactional
     @PreAuthorize("hasAuthority('ADMIN')")
     @PatchMapping(urlSuffix)
     public ResponseEntity<UserCreated> promotionUser(@PathVariable Long pkUser, @RequestBody PromotionAuthorityUser promotionAuthorityUser) {
         return ResponseEntity.ok().body(userService.promotionUser(pkUser, promotionAuthorityUser));
     }
 
+    @Transactional
     @DeleteMapping(urlSuffix)
     @PreAuthorize("hasAuthority('ADMIN') or #pkUser == authentication.principal.pkUser")
     public ResponseEntity<?> deleteUser(@PathVariable Long pkUser) {

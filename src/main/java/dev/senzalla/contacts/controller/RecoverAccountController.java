@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +22,7 @@ public class RecoverAccountController {
         return ResponseEntity.noContent().build();
     }
 
+    @Transactional
     @PostMapping("/{hash}")
     public ResponseEntity<UserCreated> changePassword(@PathVariable String hash, @RequestBody @Valid ResettingPassword resettingPassword) {
         return ResponseEntity.ok().body(recoverAccountService.changePassword(hash, resettingPassword));

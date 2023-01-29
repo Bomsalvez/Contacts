@@ -16,4 +16,8 @@ class DeleteMail {
     public void delete(Set<Mail> mails) {
         mailRepository.deleteAll(mails);
     }
+
+    public void delete(Long pkContact, Long pkMail) {
+        mailRepository.deleteMailToContact(pkContact, pkMail);
+    }
 }

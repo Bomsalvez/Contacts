@@ -1,6 +1,7 @@
 package dev.senzalla.contacts.service.mail;
 
 import dev.senzalla.contacts.model.contact.entity.Contacts;
+import dev.senzalla.contacts.model.contact.module.ContactsCreated;
 import dev.senzalla.contacts.model.mail.entity.Mail;
 import dev.senzalla.contacts.model.mail.module.MailDto;
 import dev.senzalla.contacts.model.recoveraccount.entity.RecoverAccount;
@@ -32,5 +33,13 @@ public class MailService {
 
     public void deleteMail(Set<Mail> mails) {
         deleteMail.delete(mails);
+    }
+
+    public ContactsCreated addMailToContact(Long pkContact, Set<MailDto> mailDto) {
+        return saveMailService.addMailToContact(pkContact, mailDto);
+    }
+
+    public void deleteMailToContact(Long pkContact, Long pkMail) {
+        deleteMail.delete(pkContact, pkMail);
     }
 }

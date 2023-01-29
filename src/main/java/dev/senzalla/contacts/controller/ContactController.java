@@ -4,7 +4,6 @@ import dev.senzalla.contacts.model.contact.module.ContactList;
 import dev.senzalla.contacts.model.contact.module.ContactsCreated;
 import dev.senzalla.contacts.model.contact.module.ContactsDto;
 import dev.senzalla.contacts.service.contact.ContactService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -55,6 +55,7 @@ public class ContactController {
         return ResponseEntity.ok().body(contactService.editContact(contactsDto, pkContact));
     }
 
+    @Transactional
     @DeleteMapping(urlSuffix)
     @PreAuthorize("hasAnyAuthority('ADMIN','CREATE')")
     public ResponseEntity<?> deleteContact(@PathVariable Long pkContact) {
