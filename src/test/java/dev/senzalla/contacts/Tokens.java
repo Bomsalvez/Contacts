@@ -1,0 +1,9 @@
+package dev.senzalla.contacts;
+
+public class Tokens {
+    public static String tokenAdmin = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJDb250YWN0cyIsInN1YiI6IjIiLCJpYXQiOjE2NzU2MDUzNTQsImV4cCI6MTcwNzE2Mjk1NH0.l7VMrUNEbpETBIgMYEgSvxXTg9SujWCSACi8B9D-MS8RQcIHMAO2dI90DVF9n8XLJu0M_FNTeZOcBnc_Ssv0Jg";
+    public static String tokenCreate = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJDb250YWN0cyIsInN1YiI6IjYiLCJpYXQiOjE2NzU2MDY0NTIsImV4cCI6MTcwNzE2NDA1Mn0.ciBWKlDOiNA8ed9cNezZZ3YIQxVS_xmBhudSXDmRjefuJTQz7jYuo8JUPAYrZrzy2Lqfu54PQ_bPsBcGQDDtxA";
+    public static String tokenRead = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJDb250YWN0cyIsInN1YiI6IjUiLCJpYXQiOjE2NzU2MDUxMjQsImV4cCI6MTcwNzE2MjcyNH0.MGeWB9YSuknzKtZ0DHQGD89AeHYSKiO9NNQ5Sq-lJPN5o6WtMhKXqmCFlZk411337pmMJtDyPJeQBc_7qNUZew";
+
+
+}

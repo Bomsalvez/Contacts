@@ -1,5 +1,6 @@
 package dev.senzalla.contacts.controller.contact;
 
+import dev.senzalla.contacts.Tokens;
 import dev.senzalla.contacts.controller.ContactController;
 import dev.senzalla.contacts.model.contact.entity.Contacts;
 import dev.senzalla.contacts.model.contact.module.ContactsMinimal;
@@ -29,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class FindMultipleContactTest {
-    private final String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJDb250YWN0cyIsInN1YiI6IjIiLCJpYXQiOjE2NzUyMTUxOTgsImV4cCI6MTY3NTMwMTU5OH0.kXjvZ5ODxyx8ZkDIi8DUyQyXRmvzUkWt4snms4wwh1GfyHz4Ip17v-1gXMFCu3vLvgNa3zZoH2z-0F_h37jZhg";
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,7 +42,7 @@ public class FindMultipleContactTest {
     @Test
     void shouldOkFindMultipleContact() throws Exception {
         Mockito.when(contactsRepository.findByNameContact(Mockito.any(), Mockito.any())).thenReturn(Page.empty());
-        ResultActions perform = mockMvc.perform(get("/contact", 0).param("Authorization", token).contentType(MediaType.APPLICATION_JSON));
+        ResultActions perform = mockMvc.perform(get("/contact", 0).param("Authorization", Tokens.tokenCreate).contentType(MediaType.APPLICATION_JSON));
 
         perform.andDo(print()).andExpect(status().isOk());
     }
@@ -50,7 +50,7 @@ public class FindMultipleContactTest {
     @Test
     void shouldOkFindMultipleContactWithAuthorization() {
         Mockito.when(contactsRepository.findByNameContact(Mockito.any(), Mockito.any())).thenReturn(new PageImpl<>(List.of(new Contacts())));
-        var teste = contactController.findMultipleContact(Pageable.unpaged(), null, token);
+        var teste = contactController.findMultipleContact(Pageable.unpaged(), null, Tokens.tokenCreate);
         Assertions.assertInstanceOf(ContactsSummarize.class, Objects.requireNonNull(teste.getBody()).stream().findAny().orElseThrow());
     }
 

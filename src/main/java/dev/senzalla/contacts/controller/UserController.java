@@ -36,11 +36,13 @@ public class UserController {
     }
 
     @GetMapping(urlSuffix)
+    @PreAuthorize("hasAuthority('ADMIN') or #pkUser == authentication.principal.pkUser")
     public ResponseEntity<UserCreated> findUser(@PathVariable Long pkUser) {
         return ResponseEntity.ok().body(userService.findUserCreated(pkUser));
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Page<UserSummarize>> findListUser(
             @SortDefault(sort = "nameUser", direction = Sort.Direction.ASC) Pageable pageable,
             @RequestParam(value = "nameUser", required = false) String nameUser,
