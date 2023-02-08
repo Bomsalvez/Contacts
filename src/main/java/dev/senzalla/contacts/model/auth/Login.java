@@ -1,6 +1,6 @@
 package dev.senzalla.contacts.model.auth;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
-public record Login(@NotNull String mail, @NotNull String password) {
+public record Login(@NotBlank String mail, @NotBlank String password) {
 }

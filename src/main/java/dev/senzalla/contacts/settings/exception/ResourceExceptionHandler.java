@@ -6,6 +6,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,27 +20,9 @@ import java.util.List;
 public class ResourceExceptionHandler {
     private final MessageSource messageSource;
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public Error handle(NotFoundException ex) {
-        return new Error(ex.getMessage());
-    }
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(DuplicateException.class)
     public Error handle(DuplicateException ex) {
-        return new Error(ex.getMessage());
-    }
-
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(FailureAuthenticationException.class)
-    public Error handle(FailureAuthenticationException ex) {
-        return new Error(ex.getMessage());
-    }
-
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(DateException.class)
-    public Error handle(DateException ex) {
         return new Error(ex.getMessage());
     }
 
@@ -52,6 +35,12 @@ public class ResourceExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ExternalUser.class)
     public Error handle(ExternalUser ex) {
+        return new Error(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public Error handle(MissingServletRequestParameterException ex) {
         return new Error(ex.getMessage());
     }
 
@@ -74,5 +63,23 @@ public class ResourceExceptionHandler {
             errors.add(error);
         });
         return errors;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public Error handle(NotFoundException ex) {
+        return new Error(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(FailureAuthenticationException.class)
+    public Error handle(FailureAuthenticationException ex) {
+        return new Error(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(DateException.class)
+    public Error handle(DateException ex) {
+        return new Error(ex.getMessage());
     }
 }

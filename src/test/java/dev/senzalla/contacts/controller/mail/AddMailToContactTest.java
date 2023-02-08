@@ -1,7 +1,7 @@
 package dev.senzalla.contacts.controller.mail;
 
-import dev.senzalla.contacts.constants.Tokens;
 import dev.senzalla.contacts.constants.Errors;
+import dev.senzalla.contacts.constants.Tokens;
 import dev.senzalla.contacts.model.contact.entity.Contacts;
 import dev.senzalla.contacts.model.mail.entity.Mail;
 import dev.senzalla.contacts.repository.ContactsRepository;
@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class AddMailToContactTest {
     private final String urlTemplate = "/mail/{pkContact}";
+
     @Autowired
     private MockMvc mockMvc;
 
