@@ -1,4 +1,4 @@
-package dev.senzalla.contacts;
+package dev.senzalla.contacts.constants;
 
 public class Tokens {
     public static String tokenAdmin = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJDb250YWN0cyIsInN1YiI6IjIiLCJpYXQiOjE2NzU2MDUzNTQsImV4cCI6MTcwNzE2Mjk1NH0.l7VMrUNEbpETBIgMYEgSvxXTg9SujWCSACi8B9D-MS8RQcIHMAO2dI90DVF9n8XLJu0M_FNTeZOcBnc_Ssv0Jg";
