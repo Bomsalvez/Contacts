@@ -1,6 +1,6 @@
 package dev.senzalla.contacts.controller.contact;
 
-import dev.senzalla.contacts.Tokens;
+import dev.senzalla.contacts.constants.Tokens;
 import dev.senzalla.contacts.model.contact.entity.Contacts;
 import dev.senzalla.contacts.repository.ContactsRepository;
 import dev.senzalla.contacts.repository.MailRepository;
