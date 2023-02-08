@@ -1,7 +1,7 @@
-package dev.senzalla.contacts.controller.mail;
+package dev.senzalla.contacts.controller.phonenumber;
 
 import dev.senzalla.contacts.constants.Tokens;
-import dev.senzalla.contacts.repository.MailRepository;
+import dev.senzalla.contacts.repository.PhonenumberRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +18,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DeleteMailTest {
+public class DeletePhonenumberTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private MailRepository mailRepository;
+    private PhonenumberRepository mailRepository;
 
     @Test
-    void shouldOkWhenDeleteMail() throws Exception {
-        final String urlTemplate = "/mail/{pkContact}";
-        Mockito.doNothing().when(mailRepository).deleteMailToContact(Mockito.anyLong(), Mockito.anyLong());
+    void shouldOkWhenDeletePhonenumber() throws Exception {
+        final String urlTemplate = "/phone/{pkContact}";
+        Mockito.doNothing().when(mailRepository).deletePhoneToContact(Mockito.anyLong(), Mockito.anyLong());
 
         ResultActions perform = mockMvc.perform(delete(urlTemplate, 1)
                 .header("Authorization", Tokens.tokenCreate)
-                .param("pkMail", "1")
+                .param("pkPhonenumber", "1")
                 .contentType(MediaType.APPLICATION_JSON)
         );
 
