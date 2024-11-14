@@ -35,13 +35,20 @@ public class UserController {
         return ResponseEntity.created(uri).body(newUser);
     }
 
+    @GetMapping
+    public ResponseEntity<UserCreated> findUserByToken(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok().body(userService.findUserCreated(token));
+    }
+
+
+
     @GetMapping(urlSuffix)
     @PreAuthorize("hasAuthority('ADMIN') or #pkUser == authentication.principal.pkUser")
     public ResponseEntity<UserCreated> findUser(@PathVariable Long pkUser) {
         return ResponseEntity.ok().body(userService.findUserCreated(pkUser));
     }
 
-    @GetMapping
+    @GetMapping("/list")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Page<UserSummarize>> findListUser(
             @SortDefault(sort = "nameUser", direction = Sort.Direction.ASC) Pageable pageable,

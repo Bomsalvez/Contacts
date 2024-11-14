@@ -34,7 +34,7 @@ class CreateUserService {
             definePermissions(user);
             encodePassword(user);
             user = userRepository.save(user);
-            mailService.sendMailToCreateAccount(user);
+//            mailService.sendMailToCreateAccount(user);
             return UserMapper.toUserCreated(user);
         } catch (DataIntegrityViolationException ex) {
             throw new DuplicateException(Objects.requireNonNull(ex.getRootCause()).getMessage());

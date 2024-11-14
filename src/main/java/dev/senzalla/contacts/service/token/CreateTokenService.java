@@ -31,7 +31,8 @@ public class CreateTokenService {
         final Date timeExpiry = new Date(today.getTime() + timeToExpiry);
         User user = userService.findUserByMail(authenticationToken.getPrincipal().toString());
 
-        return Jwts.builder().setIssuer(nameApp).setSubject(user.getPkUser().toString())
+        return Jwts.builder().setIssuer(nameApp)
+                .setSubject(user.getPkUser().toString())
                 .setIssuedAt(today)
                 .setExpiration(timeExpiry)
                 .signWith(SignatureAlgorithm.HS512, authKey)

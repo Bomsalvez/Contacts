@@ -81,3 +81,8 @@ create table recover_account (
     mailUser varchar(255) not null,
     nameUser varchar(255) not null
 );
+
+insert into permission (namePermission)
+values ('CREATE'),
+       ('READ'),
+       ('ADMIN');
