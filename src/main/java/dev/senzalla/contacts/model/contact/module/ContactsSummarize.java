@@ -16,6 +16,6 @@ public class ContactsSummarize implements ContactList {
     private Long pkContact;
     private String nameContact;
     private String nicknameContact;
-    private Set<PhonenumberCreated> phonenumbers;
+    private PhonenumberCreated phonenumbers;
     private Set<MailCreated> mails;
 }

@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name = "address")
 public class Address {
     @Id
     @Column(name = "pkAddress", nullable = false)

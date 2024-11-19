@@ -1,6 +1,6 @@
 package dev.senzalla.contacts.service.phonenumber;
 
-import dev.senzalla.contacts.model.phonenumber.entity.Phonenumber;
+import dev.senzalla.contacts.model.phonenumber.entity.PhoneNumber;
 import dev.senzalla.contacts.repository.PhonenumberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,8 @@ import java.util.Set;
 class DeletePhonenumberService {
     private final PhonenumberRepository phonenumberRepository;
 
-    public void delete(Set<Phonenumber> phonenumbers) {
-        phonenumberRepository.deleteAll(phonenumbers);
+    public void delete(Set<PhoneNumber> phoneNumbers) {
+        phonenumberRepository.deleteAll(phoneNumbers);
     }
 
     public void deletePhoneToContact(Long pkContact, Long pkPhonenumber) {

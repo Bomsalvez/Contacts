@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name = "mail")
 public class Mail {
     @Id
     @Column(name = "pkMail", nullable = false)

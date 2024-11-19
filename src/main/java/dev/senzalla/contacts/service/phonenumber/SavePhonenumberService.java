@@ -2,9 +2,9 @@ package dev.senzalla.contacts.service.phonenumber;
 
 import dev.senzalla.contacts.model.contact.entity.Contacts;
 import dev.senzalla.contacts.model.contact.module.ContactsCreated;
-import dev.senzalla.contacts.model.phonenumber.entity.Phonenumber;
+import dev.senzalla.contacts.model.phonenumber.entity.PhoneNumber;
 import dev.senzalla.contacts.model.phonenumber.mapper.PhonenumberMapper;
-import dev.senzalla.contacts.model.phonenumber.module.PhonenumberDto;
+import dev.senzalla.contacts.model.phonenumber.module.PhoneNumberDto;
 import dev.senzalla.contacts.repository.PhonenumberRepository;
 import dev.senzalla.contacts.service.contact.FindContactService;
 import dev.senzalla.contacts.settings.exception.DuplicateException;
@@ -22,19 +22,19 @@ class SavePhonenumberService {
     private final PhonenumberRepository phonenumberRepository;
     private final FindContactService contactService;
 
-    public void addPhonenumberToContact(Set<PhonenumberDto> phonenumbersDto, Contacts contacts) {
+    public void addPhonenumberToContact(Set<PhoneNumberDto> phonenumbersDto, Contacts contacts) {
         if (phonenumbersDto != null) {
             phonenumbersDto.stream().map(PhonenumberMapper::toPhonenumber).forEach(phonenumber -> addPhonenumber(phonenumber, contacts));
         }
     }
 
-    public ContactsCreated addPhonenumberToContact(Long pkContact, Set<PhonenumberDto> phonenumberDtos) {
+    public ContactsCreated addPhonenumberToContact(Long pkContact, Set<PhoneNumberDto> phoneNumberDtos) {
         Contacts contacts = contactService.findContact(pkContact);
-        addPhonenumberToContact(phonenumberDtos, contacts);
+        addPhonenumberToContact(phoneNumberDtos, contacts);
         return contactService.findContactDto(pkContact);
     }
 
-    private void addPhonenumber(Phonenumber phonenumber, Contacts contacts) {
+    private void addPhonenumber(PhoneNumber phonenumber, Contacts contacts) {
         try {
             phonenumber.setContacts(contacts);
             phonenumberRepository.save(phonenumber);

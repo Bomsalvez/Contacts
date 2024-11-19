@@ -9,7 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Phonenumber {
+@Table(name = "phonenumber")
+public class PhoneNumber {
     @Id
     @Column(name = "pkPhoneNumber", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

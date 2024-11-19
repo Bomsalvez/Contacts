@@ -2,7 +2,7 @@ package dev.senzalla.contacts.model.contact.module;
 
 import dev.senzalla.contacts.model.address.module.AddressDto;
 import dev.senzalla.contacts.model.mail.module.MailDto;
-import dev.senzalla.contacts.model.phonenumber.module.PhonenumberDto;
+import dev.senzalla.contacts.model.phonenumber.module.PhoneNumberDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -27,7 +27,7 @@ public class ContactsDto {
     private String nicknameContact;
 
     @Valid
-    private Set<PhonenumberDto> phonenumbers;
+    private Set<PhoneNumberDto> phoneNumbers;
 
     @Valid
     private Set<MailDto> mails;

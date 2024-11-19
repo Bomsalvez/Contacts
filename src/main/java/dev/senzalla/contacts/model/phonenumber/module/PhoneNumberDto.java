@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PhonenumberDto {
+public class PhoneNumberDto {
     @NotBlank
     @Pattern(regexp = "[0-9]{11,15}")
     private String phoneNumber;

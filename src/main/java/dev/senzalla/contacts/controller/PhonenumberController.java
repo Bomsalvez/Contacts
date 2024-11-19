@@ -1,7 +1,7 @@
 package dev.senzalla.contacts.controller;
 
 import dev.senzalla.contacts.model.contact.module.ContactsCreated;
-import dev.senzalla.contacts.model.phonenumber.module.PhonenumberDto;
+import dev.senzalla.contacts.model.phonenumber.module.PhoneNumberDto;
 import dev.senzalla.contacts.service.phonenumber.PhonenumberService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -22,8 +22,8 @@ public class PhonenumberController {
     @Transactional
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN','CREATE')")
-    public ResponseEntity<ContactsCreated> addPhonenumberToContact(@PathVariable Long pkContact, @RequestBody @Valid Set<PhonenumberDto> phonenumberDtos) {
-        return ResponseEntity.ok().body(phonenumberService.addPhonenumberToContact(pkContact, phonenumberDtos));
+    public ResponseEntity<ContactsCreated> addPhonenumberToContact(@PathVariable Long pkContact, @RequestBody @Valid Set<PhoneNumberDto> phoneNumberDtos) {
+        return ResponseEntity.ok().body(phonenumberService.addPhonenumberToContact(pkContact, phoneNumberDtos));
     }
 
     @Transactional

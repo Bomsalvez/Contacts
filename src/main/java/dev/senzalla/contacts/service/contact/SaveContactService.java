@@ -39,7 +39,7 @@ class SaveContactService {
 
     private ContactsCreated saveContact(Contacts contacts, ContactsDto contactsDto) {
         contactsRepository.save(contacts);
-        phonenumberService.addPhonenumberToContact(contactsDto.getPhonenumbers(), contacts);
+        phonenumberService.addPhonenumberToContact(contactsDto.getPhoneNumbers(), contacts);
         mailService.addMailToContact(contactsDto.getMails(), contacts);
         return ContactsMapper.toContactsCreated(contacts);
     }

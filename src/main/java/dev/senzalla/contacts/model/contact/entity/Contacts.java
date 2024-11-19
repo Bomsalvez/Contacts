@@ -2,7 +2,7 @@ package dev.senzalla.contacts.model.contact.entity;
 
 import dev.senzalla.contacts.model.address.entity.Address;
 import dev.senzalla.contacts.model.mail.entity.Mail;
-import dev.senzalla.contacts.model.phonenumber.entity.Phonenumber;
+import dev.senzalla.contacts.model.phonenumber.entity.PhoneNumber;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -16,6 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "contacts")
 public class Contacts {
     @Id
     @Column(name = "pkContact", nullable = false)
@@ -35,7 +36,7 @@ public class Contacts {
     private String nicknameContact;
 
     @OneToMany(mappedBy = "contacts", cascade = CascadeType.REFRESH)
-    private Set<Phonenumber> phonenumbers;
+    private Set<PhoneNumber> phoneNumbers;
 
     @OneToMany(mappedBy = "contacts", cascade = CascadeType.REFRESH)
     private Set<Mail> mails;
