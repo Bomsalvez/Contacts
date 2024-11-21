@@ -3,7 +3,7 @@ package dev.senzalla.contacts.controller.phonenumber;
 import dev.senzalla.contacts.constants.Errors;
 import dev.senzalla.contacts.constants.Tokens;
 import dev.senzalla.contacts.model.contact.entity.Contacts;
-import dev.senzalla.contacts.model.phonenumber.entity.Phonenumber;
+import dev.senzalla.contacts.model.phonenumber.entity.PhoneNumber;
 import dev.senzalla.contacts.repository.ContactsRepository;
 import dev.senzalla.contacts.repository.PhonenumberRepository;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AddPhonenumberToContactTest {
+public class AddPhoneNumberToContactTest {
     private final String urlTemplate = "/phone/{pkContact}";
 
     @Autowired
@@ -39,7 +39,7 @@ public class AddPhonenumberToContactTest {
     @Test
     void shouldOkWhenAddPhonenumberToContactTest() throws Exception {
         Mockito.when(contactsRepository.findByPkContact(Mockito.anyLong())).thenReturn(Optional.of(new Contacts()));
-        Mockito.when(phonenumberRepository.save(Mockito.any())).thenReturn(new Phonenumber());
+        Mockito.when(phonenumberRepository.save(Mockito.any())).thenReturn(new PhoneNumber());
 
         ResultActions perform = mockMvc.perform(post(urlTemplate, 1)
                 .header("Authorization", Tokens.tokenCreate)

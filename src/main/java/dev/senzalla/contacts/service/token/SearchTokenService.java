@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-class SearchTokenService {
+public class SearchTokenService {
     @Value("${jwt.api.secret}")
     private String authKey;
 

@@ -19,7 +19,6 @@ class FindMultipleContactService {
 
     public Page<ContactList> findMultipleContact(Pageable pageable, String nameContact, String token) {
         Page<Contacts> contacts = contactsRepository.findByNameContact(pageable, nameContact);
-        token = tokenService.extractToken(token);
         boolean isTokenPresent = tokenService.checkValidToken(token);
         if (isTokenPresent) {
             return contacts.map(ContactsMapper::toContactsSummarize);

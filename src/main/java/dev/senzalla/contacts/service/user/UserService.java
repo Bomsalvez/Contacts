@@ -56,4 +56,8 @@ public class UserService {
     public UserCreated changePassword(ResettingPassword resettingPassword) {
         return createUserService.changePassword(resettingPassword);
     }
+
+    public UserCreated findUserCreated(String token) {
+        return findUserService.findUserCreated(token);
+    }
 }

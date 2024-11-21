@@ -11,6 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MailDto {
+    private Long pkMail;
+
     @NotBlank
     private String mail;
     private TagMail tagMail;

@@ -56,7 +56,7 @@ public class ContactController {
     }
 
     @Transactional
-    @DeleteMapping(urlSuffix)
+    @DeleteMapping("/{pkContact}")
     @PreAuthorize("hasAnyAuthority('ADMIN','CREATE')")
     public ResponseEntity<?> deleteContact(@PathVariable Long pkContact) {
         contactService.deleteContact(pkContact);

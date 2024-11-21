@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.util.Set;
 
+
 /**
  * A DTO for the {@link dev.senzalla.contacts.model.contact.entity.Contacts} entity
  */
@@ -16,5 +17,5 @@ public class ContactsMinimal implements ContactList {
     private Long pkContact;
     @NotBlank
     private String nameContact;
-    private Set<PhonenumberCreated> phonenumbers;
+    private Set<PhonenumberCreated> phoneNumbers;
 }

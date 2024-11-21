@@ -19,7 +19,7 @@ class DeleteContactService {
     public void delete(Long pkContact) {
         Contacts contacts = contactsRepository.findByPkContact(pkContact).orElseThrow(() -> new NotFoundException("Contato não encontrado"));
         mailService.deleteMail(contacts.getMails());
-        phonenumberService.deletePhonenumber(contacts.getPhonenumbers());
+        phonenumberService.deletePhonenumber(contacts.getPhoneNumbers());
         contactsRepository.delete(contacts);
     }
 }

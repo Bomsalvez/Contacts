@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Getter
 @Setter
 @Entity
+@Table(name = "permission")
 public class Permission implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -16,7 +17,7 @@ public class Permission implements GrantedAuthority {
 
     @Basic
     @Enumerated(EnumType.STRING)
-    @Column(name = "namePermission", nullable = false, length = 255)
+    @Column(name = "namePermission", nullable = false)
     private EPermission namePermission;
 
     @Override

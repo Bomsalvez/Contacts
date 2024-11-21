@@ -16,6 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "user")
 public class User implements UserDetails, TemplateMail {
     @Id
     @Column(name = "pkUser", nullable = false)
