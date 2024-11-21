@@ -28,7 +28,7 @@ public class ContactsCreated {
     private String nicknameContact;
 
     @Valid
-    private Set<PhonenumberCreated> phonenumbers;
+    private Set<PhonenumberCreated> phoneNumbers;
 
     @Valid
     private Set<MailCreated> mails;

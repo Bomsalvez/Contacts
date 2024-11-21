@@ -18,6 +18,8 @@ public interface ContactsRepository extends JpaRepository<Contacts, Long> {
     @Query("select c from Contacts c left join c.phoneNumbers p left join c.mails m left join c.addresses a where c.pkContact = :pkContact")
     Optional<Contacts> findByPkContact(Long pkContact);
 
-    @Query("select c from Contacts c where (:nameContact is null or lower(c.nameContact) like lower(concat('%',:nameContact,'%')))")
+    @Query("select c from Contacts c " +
+            "where (:nameContact is null or lower(c.nameContact) like lower(concat('%',:nameContact,'%')))" +
+            "and c.phoneNumbers is not empty")
     Page<Contacts> findByNameContact(Pageable pageable, @Param("nameContact") String nameContact);
 }
